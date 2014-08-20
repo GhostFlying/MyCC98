@@ -290,34 +290,38 @@ public class EditActivity extends BaseFragmentActivity implements OnClickListene
 
     private void setupRefDialog(final String titleString,
                                 final String contentString) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
-        builder.setTitle("提示");
-        builder.setMessage(Html.fromHtml("是否给用户：" + replyUserName + " 发送引用通知？"));
-        builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String pmTitle = "用户：" + service.getCurrentUserName() + " 在帖子中回复了你";
-                String pmContent = "详情请点击：[url="
-                        + manager.getCC98PostUrl(boardID, postId, quotePageNumber)
-                        + "]"+postName+ "[/url]";
-                new SendPMTask(EditActivity.this, replyUserName, pmTitle,
-                        pmContent).execute();
-                PushReplyTask task = new PushReplyTask(EditActivity.this,
-                        postId, boardID, contentString, titleString,
-                        faceGroupChooseString, false);
-                task.execute();
-            }
-        });
-        builder.setNegativeButton("不", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                PushReplyTask task = new PushReplyTask(EditActivity.this,
-                        postId, boardID, contentString, titleString,
-                        faceGroupChooseString, false);
-                task.execute();
-            }
-        });
-        builder.show();
+//        AlertDialog.Builder builder = new AlertDialog.Builder(EditActivity.this);
+//        builder.setTitle("提示");
+//        builder.setMessage(Html.fromHtml("是否给用户：" + replyUserName + " 发送引用通知？"));
+//        builder.setPositiveButton("是", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                String pmTitle = "用户：" + service.getCurrentUserName() + " 在帖子中回复了你";
+//                String pmContent = "详情请点击：[url="
+//                        + manager.getCC98PostUrl(boardID, postId, quotePageNumber)
+//                        + "]"+postName+ "[/url]";
+//                new SendPMTask(EditActivity.this, replyUserName, pmTitle,
+//                        pmContent).execute();
+//                PushReplyTask task = new PushReplyTask(EditActivity.this,
+//                        postId, boardID, contentString, titleString,
+//                        faceGroupChooseString, false);
+//                task.execute();
+//            }
+//        });
+//        builder.setNegativeButton("不", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                PushReplyTask task = new PushReplyTask(EditActivity.this,
+//                        postId, boardID, contentString, titleString,
+//                        faceGroupChooseString, false);
+//                task.execute();
+//            }
+//        });
+//        builder.show();
+        PushReplyTask task = new PushReplyTask(EditActivity.this,
+                postId, boardID, contentString, titleString,
+                faceGroupChooseString, false);
+        task.execute();
     }
 
     /**
